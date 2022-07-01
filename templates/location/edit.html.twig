@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container">
+<h1> Edit Location </h1>
+
+
+<form action="" method="post">
+    <div class="form-group">
+    <label>Groupe</label>
+    <input type="text" class="form-control" name="groupe" value={{locations.groupe}}>
+    </div>
+    <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" name="name" value={{locations.Name}} >
+    </div>
+
+    <div class="form-group">
+    <label>Country</label>
+    <input type="text" class="form-control" name="country" value={{locations.country}}>
+    </div>
+    
+    <div class="form-group">
+    <label>City</label>
+    <input type="text" class="form-control" name="city" value={{locations.city}}>
+    </div>
+    <div class="form-group">
+    <label>Gps</label>
+    <input type="text" class="form-control" name="gps" value={{locations.gps}}>
+    </div>
+    
+    <br>
+    <button type="submit" class="btn btn-info" href="{{path('location')}}"> Add </button>
+
+
+</form>
+
+
+
+{% endblock %}

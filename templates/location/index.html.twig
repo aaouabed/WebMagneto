@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+<div class="container">
+<br>
+    <br>
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Location ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">country</th>
+            <th scope="col">city</th>
+            <th scope="col">Gps</th>
+            <th scope="col">Action</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in locations %}
+
+        <tr>
+            
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.country}}</td>
+            <td>{{user.city}}</td>
+            <td>{{user.gps}}</td>
+            <td><a class="btn btn-primary" href="{{path('location_edit', { 'id': user.id })}}">Edit</a><a class="btn btn-danger" href="{{path('location_delete', { 'id': user.id })}}">Delete</a></td>
+
+            
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<a class="btn btn-info" href="{{path('location_create')}}">Add new Location </a>
+
+
+
+
+{% endblock %}

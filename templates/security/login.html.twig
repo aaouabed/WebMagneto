@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Connexion{% endblock %}</title>
+        <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+{% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="text-center text-dark mt-5">Panel Admin</h2>
+        <div class="text-center mb-5 text-dark">Connexion</div>
+        <div class="card my-5">
+
+          <form class="card-body cardbody-color p-lg-5" action="{{path('security_login')}}" method="post">
+
+            <div class="text-center">
+              <img src="images/axone.png" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                width="200px" alt="profile">
+            </div>
+
+            <div class="mb-3">
+              <input type="text" class="form-control" name="_username" type="text" id="username" aria-describedby="emailHelp"
+                placeholder="Adresse email ...">
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" required name="_password" type="password" id="password"  placeholder="Mot de passe ...">
+            </div>
+            <div class="text-center"><button type="submit" href="{{path('home')}}" class="btn btn-color px-5 mb-5 w-100">Login</button></div>
+            <div id="emailHelp" class="form-text text-center mb-5 text-dark">Not
+              Registered? <a href="{{path('inscription')}}" class="text-dark fw-bold"> Create an
+                Account</a>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

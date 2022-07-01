@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container">
+<h1> Add new Group </h1>
+
+
+<form action="" method="post">
+    
+    <div class="form-group">
+    <label> Group name</label>
+    <input type="text" class="form-control" name="group" placeholder="Group name">
+    </div>
+    <div class="form-group">
+    <label>Status</label>
+     <select class="form-select" name="status">
+     <option selected>Select status</option>
+     <option value="ON">ON</option>
+     <option value="OFF">OFF</option>   
+    </select>
+    </div>
+    <br>
+    <button class="btn btn-info" type="submit"> Add </button>
+
+
+</form>
+
+
+
+{% endblock %}

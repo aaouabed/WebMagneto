@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<h2 style="margin-top: 50px;"> User search </h2>
+
+<div class="input-group" style="margin-top: 50px;">
+  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+  aria-describedby="search-addon" />
+  <a class="btn btn-primary" href="{{path('user_search')}}" role="button">search</a>
+</div>
+Search by:
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+  <label class="form-check-label" for="exampleRadios1">
+   ID
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+  <label class="form-check-label" for="exampleRadios2">
+    Name
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+  <label class="form-check-label" for="exampleRadios2">
+    Role
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+  <label class="form-check-label" for="exampleRadios2">
+    group
+  </label>
+</div>
+
+
+{% endblock %}

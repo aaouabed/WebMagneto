@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container">
+<h1> Edit Group </h1>
+
+
+<form action="" method="post">
+
+    <div class="form-group">
+    <label> Group name</label>
+    <input type="text" class="form-control" name="groupe" value={{groups.groupe}}>
+    </div>
+    <div class="form-group">
+    <label>Status</label>
+    <select class="form-select" name="status">
+     <option selected>{{groups.status}}</option>
+     <option value="ON">ON</option>
+     <option value="OFF">OFF</option>   
+    </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-info" href="{{path('groups')}}"> Edit </button>
+
+
+</form>
+
+
+
+{% endblock %}

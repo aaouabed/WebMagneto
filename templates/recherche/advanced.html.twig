@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="container">
+
+<form>
+ 
+
+
+<table>
+    <thead>
+       
+    </thead>
+    <tbody>
+      <tr>
+        <label>Tapez un mot clé :
+        <input name="submitted-name" autocomplete="name">
+        </label>
+        </tr>
+        <tr>
+            <td>
+            <label> Selectionnez une couleur:
+              <input type="color" id="favcolor" name="favcolor" value="#ff0000"><br><br>
+            </label>
+            </td>
+
+        </tr>
+       
+        <tr>
+            <td>
+            <label> Selectionnez une date:
+            <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+            </label>
+            </td>
+
+        </tr>
+
+
+        <tr><td>
+        <label>Confidence > </label>
+        <input type="number" min="1" max="100"></td>
+        </tr>
+
+        <tr><td>
+        
+        <button type="button" class="btn btn-primary">Search..</button></td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
