@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container">
-
+<!--
 <form>
  
 
@@ -49,5 +49,34 @@
         </tr>
     </tbody>
 </table>
+-->
+<h1> TEST SECTION </h1>
+<br>
+<form>
+<td><input class="form-control"  id="nom" name="nom"></td>
+<button type="submit" class="btn btn-primary">Search..</button></td>
+</form>
+
+
+<script type='module'>
+import { lab } from 'https://cdn.skypack.dev/culori';
+	//console.log(rgb('salmon'));
+  var code = lab('red');
+  console.log(code);
+
+import { GetColorName } from 'hex-color-to-color-name';
+
+var colorName = GetColorName('000000'); 
+
+window.alert(5 + 6);
+
+</script>
+
+
+
+<script type="text/javascript">
+  document.write(code);
+
+</script>
 
 {% endblock %}

@@ -2,31 +2,35 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Persistence\ManagerRegistry;
-use App\Form\SearchElasticType;
-use App\Repository\SearchRepository;
-use Symfony\Component\Routing\Annotation\Route;
+
 use App\Entity\Objet;
 use App\Entity\Result;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use App\Form\AdvancedType;
+use App\Form\SearchElasticType;
+use App\Repository\SearchRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RechercheController extends AbstractController
 {
     /**
      * @Route("/recherche", name="recherche")
      */
-    public function index(Request $request): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {   
         $form=$this-> createForm(SearchElasticType::class);
         $search =$form -> handleRequest($request);
         $objects[]=null;  
+        $results[]=null;
+        
         
         if($form-> isSubmitted() && $form -> isValid()){
             $mot=$search -> get('mots')->getData();
@@ -62,41 +66,19 @@ class RechercheController extends AbstractController
             dump($taille);
 
 
-            //declaration tableau contenant les resultats
-            for($i=0;$i<$taille;$i++){
-            $results[$i]=new Result();
-            }
-            
-            
-            for($i=0;$i<$taille;$i++){
-           
-            $results[$i]->setObjectName($json->hits->hits[$i]->_source->object->name);
-            $results[$i]->setObjectId($json->hits->hits[$i]->_source->object->object_id);
-            $results[$i]->setObjectConfidence($json->hits->hits[$i]->_source->object->confidence);
-            $results[$i]->setObjectPositionX($json->hits->hits[$i]->_source->object->position->center_x);
-            $results[$i]->setObjectPositionY($json->hits->hits[$i]->_source->object->position->center_y);
-            $results[$i]->setObjectWidth($json->hits->hits[$i]->_source->object->position->width);
-            $results[$i]->setObjectHeight($json->hits->hits[$i]->_source->object->position->height);
-            $results[$i]->setObjectSize($json->hits->hits[$i]->_source->object->size);
-            $results[$i]->setCameraUrl($json->hits->hits[$i]->_source->view->camera->url);
-            $results[$i]->setCameraFocal($json->hits->hits[$i]->_source->view->camera->properties->focal);
-            $results[$i]->setCameraSensorWidth($json->hits->hits[$i]->_source->view->camera->properties->sensor_width);
-            $results[$i]->setCameraSensorLength($json->hits->hits[$i]->_source->view->camera->properties->sensor_length);
-            $results[$i]->setCameraPosition($json->hits->hits[$i]->_source->view->camera->properties->position);
-            $results[$i]->setTimestamp($json->hits->hits[$i]->_source->timestamp);
-
-            //attribution code couleur LAB
-            if(($json->hits->hits[$i]->_source->object->dominant_colors)!= null){
-            $results[$i]->setObjectDominantColors1($json->hits->hits[$i]->_source->object->dominant_colors[0][1][0]);
-            $results[$i]->setObjectDominantColor2($json->hits->hits[$i]->_source->object->dominant_colors[0][1][1]);
-            $results[$i]->setObjectDominantColors3($json->hits->hits[$i]->_source->object->dominant_colors[0][1][2]);
-            }
+            $results=$this->findAllresult($taille,$json);
         
-                
-        }
+        if($results != null){
+        $pagination=$paginator-> paginate(
+            $this->findAllresult($taille,$json),
+            $request->query->getInt('page', 1),
+            8
+        );}
 
+            $results=$pagination;
 
             dump($results);
+        
             return $this->render('recherche/index.html.twig', [
                 'controller_name' => 'RechercheController',
                 'form'=> $form -> createView(),
@@ -105,14 +87,67 @@ class RechercheController extends AbstractController
         }
         
         
-        
-        return $this->render('recherche/index.html.twig', [
-            'controller_name' => 'RechercheController',
-            'form'=> $form -> createView(),
-            'objects'=> null
+      
+       return $this->render('recherche/index.html.twig', [
+           'controller_name' => 'RechercheController',
+           'form'=> $form -> createView(),
+           'objects'=> null
             
-        ]);
+        ]); 
     }
+   
+
+
+
+public function findAllresult($taille, $json)
+{
+                //declaration tableau contenant les resultats
+                for($i=0;$i<$taille;$i++){
+                    $results[$i]=new Result();
+                    }
+                
+                
+                for($i=0;$i<$taille;$i++){
+                
+                $results[$i]->setObjectName($json->hits->hits[$i]->_source->object->name);
+                $results[$i]->setObjectId($json->hits->hits[$i]->_source->object->object_id);
+                $results[$i]->setObjectConfidence($json->hits->hits[$i]->_source->object->confidence);
+                $results[$i]->setObjectPositionX($json->hits->hits[$i]->_source->object->position->center_x);
+                $results[$i]->setObjectPositionY($json->hits->hits[$i]->_source->object->position->center_y);
+                $results[$i]->setObjectWidth($json->hits->hits[$i]->_source->object->position->width);
+                $results[$i]->setObjectHeight($json->hits->hits[$i]->_source->object->position->height);
+                $results[$i]->setObjectSize($json->hits->hits[$i]->_source->object->size);
+                $results[$i]->setCameraUrl($json->hits->hits[$i]->_source->view->camera->url);
+                $results[$i]->setCameraFocal($json->hits->hits[$i]->_source->view->camera->properties->focal);
+                $results[$i]->setCameraSensorWidth($json->hits->hits[$i]->_source->view->camera->properties->sensor_width);
+                $results[$i]->setCameraSensorLength($json->hits->hits[$i]->_source->view->camera->properties->sensor_length);
+                $results[$i]->setCameraPosition($json->hits->hits[$i]->_source->view->camera->properties->position);
+                $results[$i]->setTimestamp($json->hits->hits[$i]->_source->timestamp);
+    
+                //attribution code couleur LAB
+                if(($json->hits->hits[$i]->_source->object->dominant_colors)!= null){
+                $results[$i]->setObjectDominantColors1($json->hits->hits[$i]->_source->object->dominant_colors[0][1][0]);
+                $results[$i]->setObjectDominantColor2($json->hits->hits[$i]->_source->object->dominant_colors[0][1][1]);
+                $results[$i]->setObjectDominantColors3($json->hits->hits[$i]->_source->object->dominant_colors[0][1][2]);
+                }
+}
+    return $results;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
@@ -120,7 +155,9 @@ class RechercheController extends AbstractController
      */
     public function advanced(Request $request): Response
     {   
-       
+        $input=$request->query->get('nom');
+
+        dump($input);
 
 
         return $this->render('recherche/advanced.html.twig', [

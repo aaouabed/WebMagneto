@@ -105,7 +105,8 @@ class CctvController extends AbstractController
      * @Route("/cctv/live", name="live_monitoring")
      */
     public function live(Request $request, ManagerRegistry $manager){
-        
+        //composer install --ignore-platform-reqs
+
         return $this->render('cctv/live.html.twig');
     }
 

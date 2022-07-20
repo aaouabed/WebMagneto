@@ -1,74 +1,15 @@
 
 {% extends 'base.html.twig' %}
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('css/live.css') }}">
+<!--<link rel="stylesheet" href="{{ asset('css/live.css') }}"> !-->
 {% endblock %}
-
 {% block body %}
-
 <body>
-
-    <div id="wrapper" class="toggled">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <h1>Simple Sidebar</h1>
-                <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
-            </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
-  
+<iframe src="http://192.168.10.152:5601/app/kibana#/dashboard/655bcdf0-02a8-11ed-9d12-e523fd8b0896?embed=true&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!f),panels:!((embeddableConfig:(),gridData:(h:14,i:'6e34c9ad-16c2-41f9-8586-eb039e0c7ccb',w:13,x:0,y:0),id:'6e954890-02a5-11ed-9d12-e523fd8b0896',panelIndex:'6e34c9ad-16c2-41f9-8586-eb039e0c7ccb',type:lens,version:'7.8.0'),(embeddableConfig:(title:'Nombre%20total%20de%20personnes%20'),gridData:(h:14,i:'0a4ddea0-bf06-409f-9769-0ebb7d456479',w:14,x:13,y:0),id:'243d4280-02a4-11ed-9d12-e523fd8b0896',panelIndex:'0a4ddea0-bf06-409f-9769-0ebb7d456479',title:'Nombre%20total%20de%20personnes%20',type:lens,version:'7.8.0'),(embeddableConfig:(table:!n,vis:(colors:('50%20-%2075':%23629E51,'75%20-%20100':%235195CE),defaultColors:('0%20-%2050':'rgb(0,104,55)','50%20-%2075':'rgb(255,255,190)','75%20-%20100':'rgb(165,0,38)'),legendOpen:!f)),gridData:(h:14,i:ff958f73-dc36-4a9a-9c90-3620c19e32cf,w:21,x:27,y:0),id:'2369ec90-073c-11ed-9d12-e523fd8b0896',panelIndex:ff958f73-dc36-4a9a-9c90-3620c19e32cf,type:visualization,version:'7.8.0'),(embeddableConfig:(title:'Graphe%20de%20franchissement%20de%20ligne'),gridData:(h:14,i:'01cf3690-d6b2-4a52-9502-9448d7223fd1',w:15,x:0,y:14),id:cbffa640-02a2-11ed-9d12-e523fd8b0896,panelIndex:'01cf3690-d6b2-4a52-9502-9448d7223fd1',title:'Graphe%20de%20franchissement%20de%20ligne',type:lens,version:'7.8.0'),(embeddableConfig:(),gridData:(h:14,i:cb018f7c-c5da-4cfe-ba1c-7f09f842fddd,w:21,x:15,y:14),id:f4e2ed60-02a7-11ed-9d12-e523fd8b0896,panelIndex:cb018f7c-c5da-4cfe-ba1c-7f09f842fddd,type:lens,version:'7.8.0'),(embeddableConfig:(),gridData:(h:14,i:'64b030c0-74a1-4698-aed6-2ea39d53dee1',w:12,x:36,y:14),id:'94aac680-02a6-11ed-9d12-e523fd8b0896',panelIndex:'64b030c0-74a1-4698-aed6-2ea39d53dee1',type:lens,version:'7.8.0'),(embeddableConfig:(),gridData:(h:12,i:'677ae0ea-3627-479e-b55e-1190bd4a64b4',w:48,x:0,y:28),id:'684a9b60-02a6-11ed-9d12-e523fd8b0896',panelIndex:'677ae0ea-3627-479e-b55e-1190bd4a64b4',type:lens,version:'7.8.0')),query:(language:kuery,query:''),timeRestore:!f,title:Magneto_Dashboard,viewMode:edit)&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2022-06-17T11:39:57.079Z',to:'2022-07-19T08:23:59.997Z'))" height="900" width="100%"></iframe></body>
 </body>
-
 {% endblock %}
+
+
